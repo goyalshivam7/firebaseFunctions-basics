@@ -57,31 +57,3 @@ exports.myFunction = functions.https.onRequest((request, response) => {
     });
 });
 
-exports.createNewTaskWorktrolly = functions.https.onRequest((request, response) => {
-    cors(request, response, () => {
-        var name = request.body.data.Name;
-        var category = request.body.data.Category;
-        var description = request.body.data.Description;
-        var title = request.body.data.Title;
-        var creator = request.body.data.Creator;
-        var et = request.body.data.ET;
-        var priority = request.body.data.Priority;
-
-        firestore.collection(category).doc(name).set({
-                Category: category,
-                Name: name,
-                Creator: creator,
-                ET: et,
-                Priority: priority,
-                Title: title,
-                Description: description
-            })
-            .then(() => {
-                console.log('successfully saved');
-                return response.status(200).send(result);
-            })
-            .catch(() => {
-                console.error('error', error);
-            });
-    });
-});
